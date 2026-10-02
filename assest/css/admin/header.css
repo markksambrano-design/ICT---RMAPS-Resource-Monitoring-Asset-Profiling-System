@@ -1,0 +1,352 @@
+.top-header {
+    background: #050811; /* Match user header background */
+    color: white;
+    padding: 20px 30px; /* Increased padding slightly more */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin: 0 -30px 20px -30px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Match user header gap */
+}
+
+.header-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Match user header gap */
+}
+
+.system-logo-icon {
+    font-size: 1.8rem;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+}
+
+.system-title {
+    font-weight: 800;
+    font-size: 1.7rem;
+    margin: 0;
+    color: white;
+    letter-spacing: -0.5px;
+}
+
+.system-tagline {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0.85;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* User Profile Styles */
+.user-profile-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-profile-info:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.user-avatar-icon {
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #cbd5f5;
+}
+
+.user-avatar-icon i {
+    color: #cbd5f5;
+    transition: color 0.2s ease;
+}
+
+.user-profile-info:hover .user-avatar-icon i {
+    color: #ffffff;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.user-name {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.user-role {
+    color: #cbd5f5;
+    font-size: 0.8rem;
+    opacity: 0.9;
+    margin: 0;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.avatar-img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-toggle::after {
+    display: none; /* Hide the arrow like in the image */
+}
+
+.dropdown-menu {
+    border-radius: 12px;
+    padding: 0.75rem;
+    min-width: 240px;
+}
+
+.dropdown-header {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 800;
+    color: #64748b;
+    padding: 1rem 1.25rem 0.75rem;
+}
+
+.dropdown-item {
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #334155;
+    padding: 0.75rem 1.25rem;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    transform: translateX(6px);
+}
+
+.dropdown-item.text-danger:hover {
+    background-color: #fef2f2;
+    color: #ef4444;
+}
+
+.dropdown-item i {
+    font-size: 1.3rem;
+}
+
+.dropdown-divider {
+    margin: 0.5rem 0;
+    border-top: 1px solid #e2e8f0;
+}
+
+@media (max-width: 768px) {
+    .top-header {
+        padding: 20px 20px;
+        margin: -30px -30px 20px -30px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .system-subtitle {
+        display: none;
+    }
+    .network-status {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+.network-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 5px 9px;
+    border-radius: 10px;
+    background: rgba(20, 27, 52, 0.75);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.network-wifi-icon {
+    font-size: 1.05rem;
+    color: #2dd4bf;
+}
+
+/* Notification Styles */
+.notification-dropdown .btn-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    overflow: visible;
+}
+
+.notification-dropdown .btn-link:hover {
+    background: rgba(255, 255, 255, 0.24);
+    transform: translateY(-1px);
+}
+
+.notification-icon-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.notification-bell-icon {
+    font-size: 1.6rem;
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.22);
+}
+
+.notification-dropdown .btn-link:hover .notification-bell-icon {
+    color: #ffffff;
+}
+
+.notification-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(30%, -30%);
+    width: 22px;
+    height: 22px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0;
+    border: 2px solid rgba(15, 23, 42, 0.9);
+    background: #ef4444;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(248, 113, 113, 0.3);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 22px;
+    border-radius: 50%;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.notification-dropdown .btn-link {
+    overflow: visible;
+}
+
+.notification-menu {
+    min-width: 320px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.notification-item-empty {
+    padding: 20px;
+}
+
+.notification-content p {
+    font-size: 0.9rem;
+    color: #1e293b;
+    line-height: 1.4;
+}
+
+.notification-content small {
+    font-size: 0.8rem;
+}
+
+.notification-menu .dropdown-item {
+    white-space: normal;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.notification-menu .dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.network-ping-large {
+    font-size: 0.95rem;
+    font-weight: 900;
+    color: #a7f3d0;
+    background: rgba(3, 105, 161, 0.35);
+    border-radius: 6px;
+    padding: 2px 8px;
+    min-width: 56px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(36, 201, 245, 0.3);
+}
+
+.network-signal {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.wifi-point {
+    width: 5px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.25);
+    height: 6px;
+}
+
+.wifi-point[data-level="2"] { height: 9px; }
+.wifi-point[data-level="3"] { height: 12px; }
+.wifi-point[data-level="4"] { height: 15px; }
+.wifi-point[data-level="5"] { height: 18px; }
+
+.wifi-point.active {
+    background: #22c55e;
+}
+
+.wifi-point.medium.active {
+    background: #facc15;
+}
+
+.wifi-point.weak.active {
+    background: #ef4444;
+}
+
+
+
+#networkQuality {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}

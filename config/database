@@ -1,0 +1,428 @@
+#-- ===============================================
+-- ICT MIS DATABASE SCHEMA
+-- ===============================================
+
+-- Create database
+CREATE DATABASE IF NOT EXISTS ict_mis;
+USE ict_mis;
+
+-- ===============================================
+-- 1. ADMIN TABLE
+-- ===============================================
+CREATE TABLE admin (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) NOT NULL UNIQUE,
+    profile_image VARCHAR(255) DEFAULT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin') NOT NULL DEFAULT 'admin',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO admin (email, password, role) VALUES
+('admin@gmail.com', MD5('admin@12345'), 'admin')
+ON DUPLICATE KEY UPDATE email=email;
+
+-- ===============================================
+-- 2. OFFICES TABLE
+-- ===============================================
+CREATE TABLE offices (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    office_name VARCHAR(150) NOT NULL UNIQUE,
+    office_code VARCHAR(50),
+    head_of_office VARCHAR(255),
+    contact_number VARCHAR(50),
+    office_email VARCHAR(100),
+    category VARCHAR(50) DEFAULT 'other',
+    date_submitted DATE,
+    can_submit_forms TINYINT(1) DEFAULT 1,
+    max_forms_per_year INT DEFAULT 1,
+    max_equipment_units INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert Default Offices
+INSERT INTO offices (office_name) VALUES
+('Mayor''s Office'),
+('OMPDC'),
+('Office of the SB Secretariat'),
+('Municipal Budget Office'),
+('Municipal Agriculture Office'),
+('Municipal Health Office'),
+('Municipal Assessor''s Office'),
+('Municipal Engineering Office'),
+('Human Resource Mgmt Office'),
+('Municipal Accounting Office'),
+('MENRO'),
+('Municipal Registration Office'),
+('Municipal Cooperative Office'),
+('MSWD'),
+('Public Market Office'),
+('General Services Office'),
+('Municipal Treasury Office'),
+('MDRRMO'),
+('Slaughterhouse Section'),
+('Real Property Tax Section'),
+('Bus. Tax Section'),
+('Municipal Library'),
+('Municipal Tourism Office'),
+('POSO'),
+('Community Affairs Office'),
+('Public Information Office')
+ON DUPLICATE KEY UPDATE office_name = VALUES(office_name);
+
+-- ===============================================
+-- 3. USERS TABLE
+-- ===============================================
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    office VARCHAR(100) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    head_of_office VARCHAR(100),
+    contact_number VARCHAR(20),
+    office_email VARCHAR(100),
+    mission_statement TEXT,
+    profile_image VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (office) REFERENCES offices(office_name) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ 
+-- ===============================================
+-- 5. FORM TABLE
+-- ===============================================
+CREATE TABLE form (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    office_name VARCHAR(255) NOT NULL,
+    office_id INT NOT NULL,
+    computer_equipment ENUM('desktop computer', 'laptop', 'both') NOT NULL,
+    desktop_computer_units INT DEFAULT 0,
+    laptop_units INT DEFAULT 0,
+    date_submitted DATE NOT NULL,
+    FOREIGN KEY (office_id) REFERENCES offices(id) ON DELETE CASCADE
+);
+
+-- ===============================================
+-- 6. COMPUTER EQUIPMENT TABLE
+-- ===============================================
+CREATE TABLE computer_equipment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    office_name VARCHAR(150) NOT NULL,
+    form_id INT DEFAULT NULL,
+    item VARCHAR(100) NOT NULL,
+    number_of_units INT,
+    brand VARCHAR(100),
+    processor VARCHAR(100),
+    ram VARCHAR(50),
+    hdd VARCHAR(50),
+    ssd VARCHAR(50),
+    equipment_image VARCHAR(500) DEFAULT NULL,
+    status VARCHAR(50) DEFAULT 'operational',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (office_name) REFERENCES offices(office_name) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (form_id) REFERENCES form(id) ON DELETE CASCADE
+);
+
+-- ===============================================
+-- 7. OTHER ICT EQUIPMENT TABLE
+-- ===============================================
+CREATE TABLE other_ict_equipment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    office_id INT NOT NULL,
+    form_id INT DEFAULT NULL,
+    inkjet_printer INT DEFAULT 0,
+    inkjet_printer_model TEXT,
+    dot_matrix_printer INT DEFAULT 0,
+    dot_matrix_printer_model TEXT,
+    routers INT DEFAULT 0,
+    routers_model TEXT,
+    deskjet_printer INT DEFAULT 0,
+    deskjet_printer_model TEXT,
+    switch_hubs INT DEFAULT 0,
+    switch_hubs_model TEXT,
+    modem INT DEFAULT 0,
+    modem_model TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (office_id) REFERENCES offices(id) ON DELETE CASCADE,
+    FOREIGN KEY (form_id) REFERENCES form(id) ON DELETE CASCADE
+);
+
+-- ===============================================
+-- 8. SYSTEMS TABLE
+-- ===============================================
+CREATE TABLE systems (
+    
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    office_id INT NOT NULL,
+    form_id INT DEFAULT NULL,
+    
+    -- Existing Systems (1 to 10)
+    system_1 VARCHAR(255),
+    system_2 VARCHAR(255),
+    system_3 VARCHAR(255),
+    system_4 VARCHAR(255),
+    system_5 VARCHAR(255),
+    system_6 VARCHAR(255),
+    system_7 VARCHAR(255),
+    system_8 VARCHAR(255),
+    system_9 VARCHAR(255),
+    system_10 VARCHAR(255),
+    
+    -- Proposed Systems (1 to 10)
+    proposed_system_1 VARCHAR(255),
+    proposed_system_2 VARCHAR(255),
+    proposed_system_3 VARCHAR(255),
+    proposed_system_4 VARCHAR(255),
+    proposed_system_5 VARCHAR(255),
+    proposed_system_6 VARCHAR(255),
+    proposed_system_7 VARCHAR(255),
+    proposed_system_8 VARCHAR(255),
+    proposed_system_9 VARCHAR(255),
+    proposed_system_10 VARCHAR(255),
+    
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (office_id) REFERENCES offices(id) ON DELETE CASCADE,
+    FOREIGN KEY (form_id) REFERENCES form(id) ON DELETE CASCADE
+);
+
+CREATE TABLE internet_connections (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    office_name VARCHAR(150) NOT NULL,
+    form_id INT DEFAULT NULL,
+    is_centralized_isp BOOLEAN DEFAULT FALSE,
+    is_centralized_lan_wan BOOLEAN DEFAULT FALSE,
+    is_centralized_db_server BOOLEAN DEFAULT FALSE,
+    is_other_isp_via_office_plan BOOLEAN DEFAULT FALSE,
+    isp_name VARCHAR(255) NULL,
+    bandwidth VARCHAR(100) NULL,
+    other_internet_source TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (office_name) REFERENCES offices(office_name) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (form_id) REFERENCES form(id) ON DELETE CASCADE
+);
+
+-- ===============================================
+-- 8.5 ICT FORMS TABLE (Central tracking)
+-- ===============================================
+CREATE TABLE IF NOT EXISTS ict_forms (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    office_name VARCHAR(150) NOT NULL,
+    date_submitted DATE NOT NULL,
+    item VARCHAR(150),
+    units INT,
+    brand VARCHAR(100),
+    processor VARCHAR(100),
+    ram VARCHAR(50),
+    hdd VARCHAR(50),
+    ssd VARCHAR(50),
+    status VARCHAR(50) DEFAULT 'operational',
+    form_status VARCHAR(50) DEFAULT 'Open',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- ===============================================
+-- 9. USER ISSP FORM TABLE (Main Form Submissions)
+-- ===============================================
+CREATE TABLE user_issp_form (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    office_name VARCHAR(150) NOT NULL,
+    date_submitted DATE NOT NULL,
+    item VARCHAR(150),
+    units INT,
+    brand VARCHAR(100),
+    processor VARCHAR(100),
+    ram VARCHAR(50),
+    hdd VARCHAR(50),
+    ssd VARCHAR(50),
+    equipment_image TEXT,
+    status VARCHAR(50) DEFAULT 'operational',
+    form_status VARCHAR(50) DEFAULT 'Open',
+    
+    -- ISP & Connectivity
+    isp_server VARCHAR(100) DEFAULT NULL,
+    lan_connection VARCHAR(100) DEFAULT NULL,
+    database_server VARCHAR(100) DEFAULT NULL,
+    other_isp VARCHAR(100) DEFAULT NULL,
+    isp_name VARCHAR(100) DEFAULT NULL,
+    bandwidth VARCHAR(50) DEFAULT NULL,
+    other_source VARCHAR(100) DEFAULT NULL,
+    pabx VARCHAR(100) DEFAULT NULL,
+    telephone_numbers VARCHAR(255) DEFAULT NULL,
+    
+    -- Communication Devices
+    base_radios INT DEFAULT 0,
+    handheld_personal INT DEFAULT 0,
+    handheld_lgu INT DEFAULT 0,
+    handheld_total INT DEFAULT 0,
+    
+    -- Systems
+    system1 TEXT,
+    system2 TEXT,
+    system3 TEXT,
+    system4 TEXT,
+    system5 TEXT,
+    proposed_system1 TEXT,
+    proposed_system2 TEXT,
+    proposed_system3 TEXT,
+    proposed_system4 TEXT,
+    proposed_system5 TEXT,
+    
+    -- Printers & Network Devices Models
+    inkjet_printer_model TEXT,
+    deskjet_printer_model TEXT,
+    dotmatrix_printer_model TEXT,
+    switch_hubs_model TEXT,
+    routers_model TEXT,
+    modem_model TEXT,
+    
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- ===============================================
+-- 10. ICT EQUIPMENT INVENTORY TABLE
+-- ===============================================
+CREATE TABLE ict_equipment_inventory (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    office_name VARCHAR(150) NOT NULL,
+    form_id INT DEFAULT NULL,
+    date_submitted DATE NOT NULL,
+    item VARCHAR(150),
+    units INT,
+    brand VARCHAR(100),
+    processor VARCHAR(100),
+    ram VARCHAR(50),
+    hdd VARCHAR(50),
+    ssd VARCHAR(50),
+    
+    -- Printers (count)
+    inkjet_printer INT DEFAULT 0,
+    inkjet_printer_model TEXT,
+    deskjet_printer INT DEFAULT 0,
+    deskjet_printer_model TEXT,
+    dotmatrix_printer INT DEFAULT 0,
+    dotmatrix_printer_model TEXT,
+    
+    -- Network Devices
+    switch_hubs INT DEFAULT 0,
+    switch_hubs_model TEXT,
+    routers INT DEFAULT 0,
+    routers_model TEXT,
+    modem INT DEFAULT 0,
+    modem_model TEXT,
+
+    -- Computerized Systems
+    system1 TEXT,
+    system2 TEXT,
+    system3 TEXT,
+    system4 TEXT,
+    system5 TEXT,
+
+    -- Proposed Systems
+    proposed_system1 TEXT,
+    proposed_system2 TEXT,
+    proposed_system3 TEXT,
+    proposed_system4 TEXT,
+    proposed_system5 TEXT,
+    
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (office_name) REFERENCES offices(office_name) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (form_id) REFERENCES form(id) ON DELETE CASCADE
+);
+
+-- ===============================================
+-- 11. MAINTENANCE REPORTS TABLE
+-- ===============================================
+CREATE TABLE maintenance_reports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    device_id INT NOT NULL,
+    source ENUM('user', 'admin') NOT NULL,
+    office_name VARCHAR(255) NOT NULL,
+    item_name VARCHAR(255) NOT NULL,
+    problem_description TEXT NOT NULL,
+    status ENUM('pending', 'in_progress', 'resolved', 'cancelled') DEFAULT 'pending',
+    urgency ENUM('low', 'medium', 'high', 'critical') DEFAULT 'medium',
+    reported_by VARCHAR(255),
+    reported_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    resolved_at TIMESTAMP NULL,
+    admin_remarks TEXT
+);
+
+-- ===============================================
+-- 12. NETWORK DEVICES TABLE
+-- ===============================================
+CREATE TABLE network_devices (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    form_id INT NOT NULL,
+    office_id INT NOT NULL,
+    device_type VARCHAR(100),
+    model VARCHAR(100),
+    brand VARCHAR(100),
+    quantity INT DEFAULT 1,
+    equipment_image VARCHAR(500) DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (form_id) REFERENCES form(id) ON DELETE CASCADE,
+    FOREIGN KEY (office_id) REFERENCES offices(id) ON DELETE CASCADE
+);
+
+-- ===============================================
+-- 13. PRINTER DEVICES TABLE
+-- ===============================================
+CREATE TABLE printer_devices (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    form_id INT NOT NULL,
+    office_id INT NOT NULL,
+    printer_type VARCHAR(100),
+    model VARCHAR(100),
+    brand VARCHAR(100),
+    quantity INT DEFAULT 1,
+    equipment_image VARCHAR(500) DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (form_id) REFERENCES form(id) ON DELETE CASCADE,
+    FOREIGN KEY (office_id) REFERENCES offices(id) ON DELETE CASCADE
+);
+
+ 
+
+-- ===============================================
+-- 15. OFFICE GALLERY TABLE
+-- ===============================================
+CREATE TABLE office_gallery (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    image_path VARCHAR(255),
+    caption VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- ===============================================
+-- SAMPLE JOIN QUERY (Reference)
+-- ===============================================
+-- SELECT
+--     o.id AS office_id,
+--     o.office_name,
+--     o.office_code,
+--     ce.item AS computer_item,
+--     ce.brand AS computer_brand,
+--     ce.processor,
+--     ce.ram,
+--     ce.hdd,
+--     ce.ssd,
+--     oie.inkjet_printer,
+--     oie.inkjet_printer_model,
+--     oie.routers,
+--     oie.routers_model
+-- FROM offices o
+-- LEFT JOIN computer_equipment ce ON o.office_name = ce.office_name
+-- LEFT JOIN other_ict_equipment oie ON o.id = oie.office_id;
+
+  

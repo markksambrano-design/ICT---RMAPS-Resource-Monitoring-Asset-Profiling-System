@@ -1,0 +1,463 @@
+/* Card & Table Styling Integration */
+.card {
+    border: none !important;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
+}
+
+html.dark-mode .card {
+    background-color: var(--card-bg) !important;
+    border: 1px solid rgba(0, 242, 255, 0.1) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+.card-header {
+    border-bottom: none !important;
+    background-color: #f8fafc !important;
+}
+
+html.dark-mode .card-header {
+    background-color: rgba(16, 20, 28, 0.7) !important;
+    border-bottom: 1px solid rgba(0, 242, 255, 0.1) !important;
+}
+
+#inventoryTable {
+    border-collapse: collapse !important;
+    width: 100%;
+    background-color: white;
+    border: 2px solid #000000 !important;
+}
+
+html.dark-mode #inventoryTable {
+    background-color: transparent !important;
+    border: 2px solid rgba(0, 242, 255, 0.2) !important;
+}
+
+#inventoryTable thead th {
+    background-color: #f1f1f1;
+    color: #000000;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    padding: 15px 12px;
+    border-bottom: 2px solid #000000 !important;
+    border-top: 2px solid #000000 !important;
+    vertical-align: middle;
+    text-align: center;
+}
+
+html.dark-mode #inventoryTable thead th {
+    background-color: rgba(0, 242, 255, 0.05) !important;
+    color: var(--neon-cyan) !important;
+    border-bottom: 2px solid rgba(0, 242, 255, 0.2) !important;
+    border-top: 2px solid rgba(0, 242, 255, 0.2) !important;
+}
+
+.second-header th {
+    font-size: 0.7rem !important;
+    background-color: #e5e5e5 !important;
+    padding: 10px 8px !important;
+    border-bottom: 1.5px solid #000000 !important;
+    border-top: 1.5px solid #000000 !important;
+}
+
+html.dark-mode .second-header th {
+    background-color: rgba(0, 242, 255, 0.03) !important;
+    border-bottom: 1.5px solid rgba(0, 242, 255, 0.2) !important;
+    border-top: 1.5px solid rgba(0, 242, 255, 0.2) !important;
+}
+
+#inventoryTable tbody tr {
+    transition: all 0.2s ease;
+}
+
+#inventoryTable tbody tr:hover {
+    background-color: #f1f5f9 !important;
+}
+
+html.dark-mode #inventoryTable tbody tr:hover {
+    background-color: rgba(0, 242, 255, 0.02) !important;
+}
+
+#inventoryTable tbody td {
+    padding: 12px 10px;
+    color: #000000;
+    border-bottom: 1.5px solid #000000 !important;
+    font-size: 0.85rem;
+}
+
+html.dark-mode #inventoryTable tbody td {
+    color: #cbd5e1 !important;
+    background-color: transparent !important;
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Vertical Group Separators */
+.group-start, 
+#inventoryTable th.group-start, 
+#inventoryTable td.group-start {
+    border-left: 1.5px solid #000000 !important;
+}
+
+html.dark-mode .group-start, 
+html.dark-mode #inventoryTable th.group-start, 
+html.dark-mode #inventoryTable td.group-start {
+    border-left: 1.5px solid rgba(0, 242, 255, 0.2) !important;
+}
+
+.v-line, 
+#inventoryTable th.v-line, 
+#inventoryTable td.v-line {
+    border-left: 1px solid #000000 !important;
+}
+
+html.dark-mode .v-line, 
+html.dark-mode #inventoryTable th.v-line, 
+html.dark-mode #inventoryTable td.v-line {
+    border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#inventoryTable th, #inventoryTable td {
+    border-left: none;
+    border-right: none;
+    text-align: center !important;
+}
+
+/* Hide scrollbar while keeping functionality */
+.table-responsive, 
+#inventoryTable_wrapper,
+.dataTables_scrollBody {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE and Edge */
+    overflow-x: auto !important;
+}
+
+.table-responsive::-webkit-scrollbar,
+#inventoryTable_wrapper::-webkit-scrollbar,
+.dataTables_scrollBody::-webkit-scrollbar {
+    display: none !important; /* Chrome, Safari, Opera */
+    width: 0 !important;
+    height: 0 !important;
+}
+
+#inventoryTable tbody tr:nth-child(even) td {
+    background-color: #f8fafc; /* Subtle zebra striping */
+}
+
+html.dark-mode #inventoryTable tbody tr:nth-child(even) td {
+    background-color: rgba(255, 255, 255, 0.01) !important;
+}
+
+#inventoryTable tbody td .fw-bold {
+    color: #1e293b;
+}
+
+html.dark-mode #inventoryTable tbody td .fw-bold {
+    color: #f8fafc !important;
+}
+
+/* Date Filter Styling */
+.date-filter-container {
+    background: #e0f2fe; /* Light blue background */
+    padding: 6px 15px;
+    border-radius: 12px;
+    border: 1px solid #bae6fd; /* Matching border */
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.date-filter-container i {
+    font-size: 1rem;
+    color: #0369a1; /* Dark blue icon */
+}
+
+html.dark-mode .date-filter-container {
+    background: rgba(3, 105, 161, 0.1);
+    border-color: rgba(3, 105, 161, 0.2);
+}
+
+.date-filter-container:hover {
+    border-color: #3b82f6;
+    background: #f0f9ff;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.date-filter input[type="date"] {
+    border: none !important;
+    background: transparent !important;
+    padding: 0 5px !important;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0369a1 !important; /* Dark blue text */
+    width: auto;
+    cursor: pointer;
+    outline: none !important;
+}
+
+.date-filter select {
+    border: none !important;
+    background: transparent !important;
+    padding: 0 5px !important;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0369a1 !important; /* Dark blue text */
+    width: auto;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none !important;
+    padding-right: 18px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%230369a1' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C2.185 5.355 2.403 5 2.808 5h9.384c.405 0 .623.355.357.658l-4.796 5.482a.5.5 0 0 1-.748 0z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right center !important;
+}
+
+html.dark-mode .date-filter input[type="date"] {
+    color: #7dd3fc !important;
+}
+
+/* Chrome/Edge Date Picker Icon Fix in Dark Mode */
+html.dark-mode .date-filter input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(1.5) sepia(1) saturate(5) hue-rotate(175deg);
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+html.dark-mode .date-filter select {
+    color: #7dd3fc !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%237dd3fc' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C2.185 5.355 2.403 5 2.808 5h9.384c.405 0 .623.355.357.658l-4.796 5.482a.5.5 0 0 1-.748 0z'/%3E%3C/svg%3E") !important;
+}
+
+.date-filter a.btn-light {
+    background: #e0f2fe !important;
+    border: 1px solid #bae6fd !important;
+    color: #0369a1 !important;
+    font-size: 0.85rem !important;
+    transition: all 0.2s ease;
+}
+
+.date-filter a.btn-light:hover {
+    background: #bae6fd !important;
+    transform: translateY(-1px);
+}
+
+html.dark-mode .date-filter a.btn-light {
+    background: rgba(3, 105, 161, 0.1) !important;
+    border-color: rgba(3, 105, 161, 0.2) !important;
+    color: #7dd3fc !important;
+}
+
+.date-filter input[type="date"]:focus {
+    box-shadow: none !important;
+}
+
+/* Category Header Colors - Keep but make borders dark */
+.bg-soft-primary {
+    background-color: #c7d2fe !important; /* Thicker/More intense Indigo */
+    color: #3730a3 !important;
+}
+
+.bg-soft-success {
+    background-color: #bbf7d0 !important; /* Thicker/More intense Green */
+    color: #166534 !important;
+}
+
+.bg-soft-warning {
+    background-color: #fef3c7 !important; /* Reduced intensity */
+    color: #b45309 !important;
+}
+
+/* Badge Refinements */
+.badge {
+    font-weight: 700;
+    padding: 5px 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.badge-item {
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+
+.badge-units {
+    background-color: #334155;
+    color: white;
+}
+
+.badge.rounded-pill {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(0,0,0,0.15);
+}
+
+/* Action Buttons */
+.btn-action {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-view { background-color: #e0f2fe; color: #0369a1; }
+.btn-view:hover { background-color: #0369a1; color: white; transform: scale(1.1); }
+
+.btn-edit { background-color: #fef3c7; color: #b45309; }
+.btn-edit:hover { background-color: #b45309; color: white; transform: scale(1.1); }
+
+.btn-delete { background-color: #fee2e2; color: #b91c1c; }
+.btn-delete:hover { background-color: #b91c1c; color: white; transform: scale(1.1); }
+
+/* Empty State */
+.empty-state {
+    padding: 4rem 2rem;
+    background: #fff;
+    border-radius: 12px;
+}
+
+/* Scrollbar */
+.table-responsive {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e0 transparent;
+    padding: 10px 5px; /* Extra padding for the shadow/lift effect */
+}
+
+.table-responsive::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: #cbd5e0;
+    border-radius: 10px;
+}
+
+/* DataTables Integration */
+.dataTables_wrapper .dataTables_filter label {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 38px !important;
+    display: flex;
+    align-items: center;
+}
+
+#formSummaryTable {
+    border-collapse: collapse !important;
+    width: 100%;
+}
+
+html.dark-mode #formSummaryTable {
+    background-color: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+html.dark-mode #formSummaryTable thead th {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    color: var(--neon-cyan) !important;
+    border-bottom: 1px solid rgba(0, 242, 255, 0.1) !important;
+}
+
+html.dark-mode #formSummaryTable tbody td {
+    color: #cbd5e1 !important;
+    background-color: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.dataTables_wrapper .dataTables_filter i {
+    color: #94a3b8 !important;
+    font-size: 1.2rem !important;
+    margin-right: 10px; /* Space between icon and input */
+    line-height: 1 !important; /* Ensure vertical alignment */
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    margin: 0 !important;
+    padding: 0 15px !important;
+    height: 38px !important;
+    width: 250px !important;
+    border-radius: 50px !important;
+    background-color: #f8fafc !important;
+    border: 1.5px solid #e2e8f0 !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+    transition: all 0.3s ease !important;
+    font-size: 0.9rem !important;
+    color: #1e293b !important;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+    background-color: #fff !important;
+    border-color: #4f46e5 !important;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1) !important;
+    width: 320px !important;
+    outline: none !important;
+}
+
+html.dark-mode .dataTables_wrapper .dataTables_filter input {
+    background-color: rgba(30, 41, 59, 0.5) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #f8fafc !important;
+}
+
+html.dark-mode .dataTables_wrapper .dataTables_filter i {
+    color: #64748b !important;
+}
+
+#headerSearchContainer .search-box {
+    margin: 0 !important;
+}
+
+#headerSearchContainer .dataTables_filter {
+    text-align: left !important;
+}
+
+.table-responsive {
+    overflow-x: auto !important;
+}
+
+#inventoryTable {
+        border-collapse: collapse !important;
+    }
+    #inventoryTable th, #inventoryTable td {
+        vertical-align: middle;
+    }
+    #inventoryTable tbody tr:nth-child(odd) {
+        background-color: #f8f9fa;
+    }
+    html.dark-mode #inventoryTable tbody tr:nth-child(odd) {
+        background-color: rgba(255, 255, 255, 0.02) !important;
+    }
+    #inventoryTable tbody tr:hover {
+        background-color: #e9ecef;
+    }
+    html.dark-mode #inventoryTable tbody tr:hover {
+        background-color: rgba(0, 242, 255, 0.05) !important;
+    }
+    .btn-action {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 14px;
+        transition: all 0.2s ease-in-out;
+    }
+    .btn-view { background-color: #e7f3ff; color: #0d6efd; }
+    .btn-view:hover { background-color: #0d6efd; color: #fff; }
+    .btn-edit { background-color: #fff0c2; color: #ffc107; }
+    .btn-edit:hover { background-color: #ffc107; color: #fff; }
+    .btn-delete { background-color: #ffebe6; color: #dc3545; }
+    .btn-delete:hover { background-color: #dc3545; color: #fff; }

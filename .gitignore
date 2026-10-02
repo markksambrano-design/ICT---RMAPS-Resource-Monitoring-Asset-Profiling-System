@@ -1,0 +1,15 @@
+.sfdx/
+/tmp/*
+!/tmp/.gitkeep
+/uploads/**
+!/uploads/
+!/uploads/equipment_images/
+/uploads/equipment_images/*
+!/uploads/equipment_images/.gitkeep
+/assest/images/profiles/*
+!/assest/images/profiles/.gitkeep
+/assest/images/admin _profile/*
+!/assest/images/admin _profile/admin1.png
+!/assest/images/admin _profile/admin2.png
+!/assest/images/admin _profile/admin3.png
+!/assest/images/admin _profile/admin4.png
