@@ -83,29 +83,6 @@
             font-weight: 600;
         }
 
-        .countdown-row {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-top: 14px;
-        }
-
-        .countdown {
-            display: grid;
-            width: 64px;
-            aspect-ratio: 1;
-            place-items: center;
-            border: 1px solid rgba(183, 224, 242, .75);
-            border-radius: 50%;
-            background: rgba(9, 31, 48, .55);
-            color: #fff;
-            font-size: 30px;
-            font-weight: 700;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .countdown-caption { color: #d2dce7; font-size: 16px; }
-
         .open-link {
             display: inline-flex;
             min-height: 44px;
@@ -157,31 +134,12 @@
             <h1 id="page-title">ICT-RMAPS</h1>
             <p class="tagline">Resource Monitoring &amp; Asset Profiling System</p>
             <p class="wait-message">Please wait a few seconds</p>
-            <div class="countdown-row" role="status" aria-live="polite">
-                <span class="countdown" id="countdown">3</span>
-                <span class="countdown-caption" id="countdown-caption">seconds until the system opens</span>
-            </div>
             <a class="open-link" href="http://rmaps.infinityfreeapp.com/main_page.php">Open RMAPS now</a>
         </section>
     </main>
     <script>
         const destination = 'http://rmaps.infinityfreeapp.com/main_page.php';
-        const countdown = document.getElementById('countdown');
-        const caption = document.getElementById('countdown-caption');
-        let secondsRemaining = 3;
-
-        const timer = window.setInterval(() => {
-            secondsRemaining -= 1;
-
-            if (secondsRemaining > 0) {
-                countdown.textContent = String(secondsRemaining);
-                return;
-            }
-
-            window.clearInterval(timer);
-            document.querySelector('.countdown-row').hidden = true;
-            window.location.replace(destination);
-        }, 1000);
+        window.setTimeout(() => window.location.replace(destination), 3000);
     </script>
 </body>
 </html>
