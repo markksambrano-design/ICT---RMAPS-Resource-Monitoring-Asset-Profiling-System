@@ -1,9 +1,10 @@
 <?php
-// Database configuration
-$host = 'localhost';
-$user = 'root';
-$password = '';
-$database = 'ict_mis';
+$dbConfig = require __DIR__ . '/db.settings.php';
+
+$host = $dbConfig['host'];
+$user = $dbConfig['user'];
+$password = $dbConfig['password'];
+$database = $dbConfig['database'];
 
 // Create connection
 $conn = mysqli_connect($host, $user, $password);

@@ -16,10 +16,11 @@ $success = "";
 $error = "";
 
 function getDbConnection($createDbIfNeeded = false) {
-    $host = 'localhost';
-    $user = 'root';
-    $password = '';
-    $database = 'ict_mis';
+    $dbConfig = require __DIR__ . '/db.settings.php';
+    $host = $dbConfig['host'];
+    $user = $dbConfig['user'];
+    $password = $dbConfig['password'];
+    $database = $dbConfig['database'];
     
     $conn = mysqli_connect($host, $user, $password);
     

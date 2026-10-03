@@ -1,4 +1,5 @@
 .sfdx/
+/config/db.local.php
 /tmp/*
 !/tmp/.gitkeep
 /uploads/**
