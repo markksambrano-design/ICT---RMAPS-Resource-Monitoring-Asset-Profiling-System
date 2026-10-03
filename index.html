@@ -3,10 +3,186 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="refresh" content="0; url=http://rmaps.infinityfreeapp.com/">
-    <title>RMAPS</title>
+    <meta name="theme-color" content="#091521">
+    <title>ICT-RMAPS | Opening system</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            font-family: "Bahnschrift", "Segoe UI", sans-serif;
+            background: #091521;
+            color: #f4f8fc;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            min-height: 100svh;
+            margin: 0;
+        }
+
+        .splash {
+            position: relative;
+            display: flex;
+            min-height: 100vh;
+            min-height: 100svh;
+            align-items: center;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .splash-image, .splash-shade {
+            position: absolute;
+            z-index: -1;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .splash-image {
+            object-fit: cover;
+            object-position: center;
+            animation: image-arrive 900ms ease-out both;
+        }
+
+        .splash-shade {
+            background: linear-gradient(90deg, rgba(5, 15, 27, .9), rgba(5, 15, 27, .62) 58%, rgba(5, 15, 27, .42));
+        }
+
+        .content {
+            width: min(1120px, calc(100% - 48px));
+            margin: 0 auto;
+            padding: 64px 0;
+            animation: content-arrive 600ms 100ms ease-out both;
+        }
+
+        .brand {
+            margin: 0 0 12px;
+            color: #c6e9f5;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        h1 {
+            max-width: 760px;
+            margin: 0;
+            font-size: 64px;
+            line-height: 1.04;
+        }
+
+        .tagline {
+            margin: 16px 0 0;
+            color: #d2dce7;
+            font-size: 19px;
+        }
+
+        .wait-message {
+            margin: 54px 0 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .countdown-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 14px;
+        }
+
+        .countdown {
+            display: grid;
+            width: 64px;
+            aspect-ratio: 1;
+            place-items: center;
+            border: 1px solid rgba(183, 224, 242, .75);
+            border-radius: 50%;
+            background: rgba(9, 31, 48, .55);
+            color: #fff;
+            font-size: 30px;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .countdown-caption { color: #d2dce7; font-size: 16px; }
+
+        .open-link {
+            display: inline-flex;
+            min-height: 44px;
+            align-items: center;
+            margin-top: 28px;
+            padding: 0 18px;
+            border: 1px solid rgba(220, 239, 248, .75);
+            border-radius: 4px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .open-link:hover, .open-link:focus-visible { background: rgba(255, 255, 255, .14); }
+
+        @keyframes image-arrive {
+            from { transform: scale(1.025); }
+            to { transform: scale(1); }
+        }
+
+        @keyframes content-arrive {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .content { width: min(100% - 36px, 480px); }
+            h1 { font-size: 42px; }
+            .tagline { max-width: 320px; font-size: 17px; line-height: 1.5; }
+            .wait-message { margin-top: 42px; font-size: 20px; }
+            .splash-shade { background: rgba(5, 15, 27, .72); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+    </style>
 </head>
 <body>
-    <p>Opening RMAPS. If you are not redirected, <a href="http://rmaps.infinityfreeapp.com/">open the application</a>.</p>
+    <main class="splash">
+        <img class="splash-image" src="assest/images/mainpage.png" alt="ICT equipment monitoring and asset profiling">
+        <div class="splash-shade" aria-hidden="true"></div>
+        <section class="content" aria-labelledby="page-title">
+            <p class="brand">ICT RESOURCE MONITORING</p>
+            <h1 id="page-title">ICT-RMAPS</h1>
+            <p class="tagline">Resource Monitoring &amp; Asset Profiling System</p>
+            <p class="wait-message">Please wait a few seconds</p>
+            <div class="countdown-row" role="status" aria-live="polite">
+                <span class="countdown" id="countdown">3</span>
+                <span class="countdown-caption" id="countdown-caption">seconds until the system opens</span>
+            </div>
+            <a class="open-link" href="http://rmaps.infinityfreeapp.com/main_page.php">Open RMAPS now</a>
+        </section>
+    </main>
+    <script>
+        const destination = 'http://rmaps.infinityfreeapp.com/main_page.php';
+        const countdown = document.getElementById('countdown');
+        const caption = document.getElementById('countdown-caption');
+        let secondsRemaining = 3;
+
+        const timer = window.setInterval(() => {
+            secondsRemaining -= 1;
+
+            if (secondsRemaining > 0) {
+                countdown.textContent = String(secondsRemaining);
+                return;
+            }
+
+            window.clearInterval(timer);
+            countdown.textContent = '0';
+            caption.textContent = 'Opening RMAPS now';
+            window.location.replace(destination);
+        }, 1000);
+    </script>
 </body>
 </html>
