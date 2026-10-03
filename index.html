@@ -179,8 +179,7 @@
             }
 
             window.clearInterval(timer);
-            countdown.textContent = '0';
-            caption.textContent = 'Opening RMAPS now';
+            document.querySelector('.countdown-row').hidden = true;
             window.location.replace(destination);
         }, 1000);
     </script>
