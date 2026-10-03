@@ -2,9 +2,7 @@
 -- ICT MIS DATABASE SCHEMA
 -- ===============================================
 
--- Create database
-CREATE DATABASE IF NOT EXISTS ict_mis;
-USE ict_mis;
+-- Select the target database before importing this schema.
 
 -- ===============================================
 -- 1. ADMIN TABLE
